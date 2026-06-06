@@ -10,7 +10,7 @@ ConnectDB();
 
 app.use(cors())
 
-app.use(bodyparser.json())
+
 
 app.use("/",router)
 
@@ -20,7 +20,8 @@ app.use("/",router)
 
 
 
+const PORT = process.env.PORT || 2000;
 
-app.listen(2000, () => {
-    console.log('Server is running on port 2000');
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
