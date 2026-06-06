@@ -9,10 +9,15 @@ const app = express();
 ConnectDB();
 
 app.use(cors())
+app.use(express.json());
 
 
 
 app.use("/",router)
+
+app.get("/", (req, res) => {
+    res.send("Backend is running successfully");
+});
 
 
 
