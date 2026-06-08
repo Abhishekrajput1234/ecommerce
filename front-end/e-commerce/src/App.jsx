@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Header from "./components/Header"
-import ProductCard from "./components/ProductCard"
+
 import Register from "./pages/Register"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
@@ -51,7 +51,6 @@ export default function App(){
   </Routes>
   
   </BrowserRouter>
-  {/*<Header/>
-  <ProductCard/>*/}
+  
   </>)
 }
