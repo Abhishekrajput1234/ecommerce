@@ -6,7 +6,7 @@ export default function FeatureProduct({setBuyproduct}){
   const navigate = useNavigate()
 
   useEffect(()=>{
-    fetch("http://localhost:2000/getfeatureproducts")
+    fetch("https://ecommerce-33jn.onrender.com/getfeatureproducts")
     .then(res=>res.json())
    .then(data=>setFeaturedProducts(data.featureproducts))
     .catch(err=>console.log(err)

@@ -40,7 +40,7 @@ const submithandler=async(e)=>{
     try {
 
         const res = await axios.post(
-            "http://localhost:2000/login",
+          "https://ecommerce-33jn.onrender.com/login",
             login
         );
 

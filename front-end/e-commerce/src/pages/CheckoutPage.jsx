@@ -28,7 +28,7 @@ export default function CheckoutPage(){
         }
 
     
-         axios.post("http://localhost:2000/checkout", checkout) 
+         axios.post("https://ecommerce-33jn.onrender.com/checkout", checkout) 
         .then(res=>console.log(res.data)  )
         .catch(err=>console.log(err))
 

@@ -8,7 +8,7 @@ export default function Product({setBuyproduct, setCart}){
 
     const fetchdata = ()=>{
 
-        fetch("http://localhost:2000/getproducts")
+        fetch("https://ecommerce-33jn.onrender.com/getproducts")
 
         .then((res)=>res.json())
 

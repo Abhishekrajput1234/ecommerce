@@ -33,7 +33,7 @@ export default function Register(){
     alert("all fields are required")
     return  
 }
-        axios.post("http://localhost:2000/register",user )
+      axios.post("https://ecommerce-33jn.onrender.com/register", user)
         .then(res=>console.log(res.data)  )
         .catch(err=>console.log(err))
 
