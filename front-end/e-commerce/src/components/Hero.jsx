@@ -4,7 +4,7 @@ export default function Hero(){
   <section className="bg-pink-50 h-80vh  flex items-center">
     <div className="max-w-7xl mx-auto flex items-center px-6 ">
         <div>
-        <h1 className="text-5xl text-gray-800 font-bold capitalize mb-5 pt-20 ">  Trending Collection for mens 2026 </h1>
+        <h1 className="text-5xl text-gray-800 font-bold capitalize mb-5 pt-20 ">  Trending Collection for mens and Womens 2026 </h1>
 
        
 
