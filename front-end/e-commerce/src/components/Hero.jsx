@@ -1,28 +1,88 @@
-export default function Hero(){
-    return(<>
-    
-  <section className="bg-pink-50 h-80vh  flex items-center">
-    <div className="max-w-7xl mx-auto flex items-center px-6 ">
-        <div>
-        <h1 className="text-5xl text-gray-800 font-bold capitalize mb-5 pt-20 ">  Trending Collection for mens and Womens 2026 </h1>
+import { useNavigate } from "react-router-dom";
 
-       
+export default function Hero() {
 
-        <p className="text-xl text-gray-800 font-bold capitalize mb-8"> Explore premium quality products with amazing offers and fast delivery.</p>
+  const navigate = useNavigate();
 
-<button className="bg-blue-500 text-white px-4 py-1 rounded-lg ">
-    buy product
-</button>
-        </div>
+  return (
+    <section className="bg-gradient-to-r from-blue-50 to-pink-50 min-h-[80vh] flex items-center">
 
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center mt-8 px-6 py-12">
 
-        
+        {/* Left Content */}
 
         <div>
-            <img src="image/pic1.webp" alt="img" className="h-154 w-full pt-15"/>
-        </div>
-    </div>
 
-  </section>
-    </>)
+          <span className="bg-red-100 text-red-600 px-4 py-2 rounded-full text-sm font-semibold">
+            🔥 New Arrival 2026 Collection
+          </span>
+
+          <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mt-6 leading-tight">
+            Discover The Latest Fashion For
+            <span className="text-blue-600"> Men & Women</span>
+          </h1>
+
+          <p className="text-lg text-gray-600 mt-6 leading-relaxed">
+            Explore premium clothing, footwear, accessories, and grocery
+            products at unbeatable prices with fast delivery and secure
+            payments.
+          </p>
+
+          <div className="flex gap-4 mt-8">
+
+            <button
+              onClick={() => navigate("/products")}
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+            >
+              Shop Now
+            </button>
+
+            <button
+              onClick={() => navigate("/register")}
+              className="border border-gray-400 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+            >
+              Explore More
+            </button>
+
+          </div>
+
+          {/* Stats */}
+
+          <div className="flex gap-8 mt-10">
+
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800">10K+</h2>
+              <p className="text-gray-500">Happy Customers</p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800">500+</h2>
+              <p className="text-gray-500">Products</p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800">24/7</h2>
+              <p className="text-gray-500">Support</p>
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* Right Image */}
+
+        <div className="flex justify-center">
+
+          <img
+            src="/image/pic1.webp"
+            alt="Fashion Collection"
+            className="max-h-[650px] w-full object-contain drop-shadow-2xl"
+          />
+
+        </div>
+
+      </div>
+
+    </section>
+  );
 }
