@@ -85,14 +85,21 @@ const addToCart = (item) => {
                          {/* RATING */}
 
     
-    <div className="flex items-center gap-4 mt-2  ">
+    <div className="flex items-center justify-between gap-4 mt-3 px-1  ">
+        <div>
 <span>
  ⭐⭐⭐⭐⭐
 </span>
 
-<span className=" font-medium text-gray-700  ">
+<span className=" font-medium text-gray-700 ml-2  ">
     (4.5)
     </span>
+    </div>
+
+
+  <span className=" text-gray-600 text-sm font-bold">
+    1.2k Reviews
+  </span>
 
     </div>
 
@@ -101,35 +108,39 @@ const addToCart = (item) => {
                         </p>
 
    
- <div className="flex items-center justify-between mt-3 px-2">
+<div className="flex items-center gap-3 mt-3">
+  <span className="text-2xl font-bold text-gray-600">
+    ₹{item.price}
+  </span>
 
-                        <p className="text-green-600 font-bold ">
-                            ₹ {item.price}
-                        </p>
+  <span className="line-through text-gray-400">
+    ₹{Math.floor(item.price * 1.4)}
+  </span>
 
-         <p className="text-red-500 font-semibold text-sm   ">
-            40% OFF
-        </p>
+  <span className="text-green-600 font-semibold">
+    40% Off
+  </span>
+</div>
 
-        </div>
+        <div className="flex flex-col items-center justify-between  mt-2 px-2">
 
-        <div className="flex items-center justify-between  mt-2 px-2">
+               <button
+                        onClick={() => addToCart(item)}
+                        className="bg-yellow-500 w-full text-white px-3 py-2 rounded-lg
+                         hover:bg-yellow-600 mt-3 cursor-pointer capitalize text-sm font-medium ">
+                            Add to cart
+                        </button>
                     
 
                         <button onClick={()=>buynow(item)}
                         
                         className="bg-blue-400 text-white px-3 py-2 rounded-lg
-                         hover:bg-blue-700 mt-3 cursor-pointer capitalize text-sm font-medium ">
+                         hover:bg-blue-700 mt-3 w-full cursor-pointer capitalize text-sm font-medium ">
                             buy now 
                         </button>
 
 
-                          <button
-                        onClick={() => addToCart(item)}
-                        className="bg-blue-400 text-white px-3 py-2 rounded-lg
-                         hover:bg-blue-700 mt-3 cursor-pointer capitalize text-sm font-medium ">
-                            Add to cart
-                        </button>
+                       
                         </div>
 
                     </div>

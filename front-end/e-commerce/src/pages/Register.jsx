@@ -47,9 +47,15 @@ export default function Register(){
     }
 return(<>
     
- <div className=" min-h-screen flex items-center  justify-center p-8">
-<div className="bg-white w-full  md:max-w-md p-6 rounded-lg shadow-md   ">
-<h3 className="text-3xl text-gray-700 font-medium mb-6 text-center capitalize " >register page</h3>
+ <div className=" min-h-screen flex items-center bg-gray-100  justify-center p-8">
+<div className="bg-white w-full  md:max-w-lg p-10 rounded-lg shadow-md   ">
+<h2 className="text-3xl font-bold text-center text-gray-700 mb-2">
+  <span className="text-blue-700 font-bold">Create</span> <span className="text-gray-600 font-bold"> Account</span>
+</h2>
+
+<p className="text-center text-gray-500  mb-6 font-medium">
+  Join our store and start shopping today
+</p>
 <form className="space-y-3" onSubmit={submithandler}>
 
 <div>
@@ -94,14 +100,23 @@ name="password"
 
 
 
-<div className="text-center">
-<button className="capitalize bg-blue-500 text-white py-1 px-4 rounded-lg
- hover:bg-blue-600 mb-3 mt-4 cursor-pointer">register</button>
+<div>
+<button className="capitalize bg-blue-500 w-full text-white py-2 px-4 rounded-lg
+ hover:bg-blue-600  mt-2 font-bold text-lg  cursor-pointer">register</button>
 </div>
 
 </form>
 
-<p className="text-gray-700 text-sm font-medium text-center">if Already register <Link to="/login" className="hover:text-blue-500">!Login</Link></p>
+<p className="text-center mt-3 font-medium text-gray-600">
+  Already have an account?
+
+  <Link
+    to="/login"
+    className="ml-2 text-blue-600 font-semibold hover:underline"
+  >
+    Login
+  </Link>
+</p>
 
 
 </div>

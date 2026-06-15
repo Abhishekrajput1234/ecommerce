@@ -27,12 +27,13 @@ export default function FeatureProduct({setBuyproduct}){
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 "> 
         {
           featuredProducts.map((item)=>(
-            <div key={item._id} className="bg-white rounded-lg shadow-md p-3 overflow-hidden">
+            <div key={item._id} className="bg-white rounded-lg shadow-md p-3  overflow-hidden">
             <img src={item.image} alt={item.name} className="w-full  h-65 object-cover rounded-lg" />
 
             <h2 className="text-xl font-bold text-gray-800 mt-3">{item.title}</h2>
 
-             <div className="flex items-center gap-4 mt-2  ">
+             <div className="flex items-center justify-between mt-2 px-1 ">
+              <div>
 <span>
  ⭐⭐⭐⭐⭐
 </span>
@@ -40,24 +41,41 @@ export default function FeatureProduct({setBuyproduct}){
 <span className=" font-medium text-gray-700  ">
     (4.5)
     </span>
+    </div>
+
+    
+  <span className=" text-gray-600 text-sm font-bold">
+    1.2k Reviews
+  </span>
 
     </div>
 
 
-            <p className="text-gray-600  mt-2 ">{item.description}</p>
-           <div className="flex items-center justify-between mt-3 px-2">
+            <p className="text-gray-600  mt-3 ">{item.description}</p>
 
-                        <p className="text-green-600 font-bold ">
-                            ₹ {item.price}
-                        </p>
+    
 
-         <p className="text-red-500 font-semibold text-sm   ">
-            40% OFF
-        </p>
+    <div className="flex items-center gap-3 mt-3">
+  <span className="text-2xl font-bold text-gray-600">
+    ₹{item.price}
+  </span>
 
-        </div>
+  <span className="line-through text-gray-400">
+    ₹{Math.floor(item.price * 1.4)}
+  </span>
 
-        <div className="flex justify-between">
+  <span className="text-green-600 font-semibold">
+    40% Off
+  </span>
+</div>
+
+        <div className="flex flex-col  ">
+
+          <button 
+            className="bg-yellow-500 w-full text-white px-3 py-2 rounded-lg
+                         hover:bg-yellow-600 mt-3 cursor-pointer capitalize text-sm font-medium ">
+            Add to cart
+          </button>
 
             <button   
 
@@ -65,8 +83,8 @@ export default function FeatureProduct({setBuyproduct}){
               setBuyproduct(item)
               navigate("/buynow")
             }}            
-            className="bg-blue-400 text-white px-3 py-2 rounded-lg
-                         hover:bg-blue-700 mt-3 cursor-pointer capitalize text-sm font-medium mb-4
+       className="    bg-blue-400 text-white px-3 py-2 rounded-lg
+                         hover:bg-blue-700 mt-3 w-full cursor-pointer capitalize text-sm font-medium 
                          ">
                         
                       

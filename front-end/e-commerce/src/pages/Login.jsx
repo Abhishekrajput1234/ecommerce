@@ -58,9 +58,16 @@ const submithandler=async(e)=>{
 
     return(<>
 
-    <div className=" min-h-screen flex items-center  justify-center p-8">
-    <div className="bg-white md:max-w-md w-full p-8 rounded-lg shadow-md">
-    <h2 className="text-3xl text-gray-700 font-medium mb-4 text-center capitalize " >login page</h2>
+    <div className=" min-h-screen flex items-center bg-gray-100  justify-center p-8">
+    <div className="bg-white w-full md:max-w-lg p-10 rounded-lg shadow-md">
+ <h2 className="text-3xl font-bold text-center text-gray-700 mb-2">
+  <span className="text-blue-700">Welcome</span>
+  <span className="text-gray-600"> Back</span>
+</h2>
+
+<p className="text-center text-gray-500 mb-6 font-medium">
+  Login to access your account
+</p>
     <form className="space-y-3"  onSubmit={submithandler} >
 
         <div>
@@ -81,12 +88,21 @@ const submithandler=async(e)=>{
         </div>
 
 <div className="text-center">
-<button className="capitalize bg-blue-500 text-white py-1 px-4 rounded-lg
- hover:bg-blue-600  mt-4 cursor-pointer ">login</button>
+<button className="capitalize bg-blue-500 w-full text-white py-2 px-4 rounded-lg
+ hover:bg-blue-600  mt-2 font-bold text-lg  cursor-pointer">login</button>
 
 </div>
- 
-<p className="text-gray-700 font-medium text-sm  text-center capitalize"> new user ?<Link to="/register" className="hover:text-blue-500"> register</Link></p>
+
+ <p className="text-center mt-2 font-medium text-gray-600">
+  New Account ?
+
+  <Link
+    to="/register"
+    className="ml-2 text-blue-600 font-semibold hover:underline"
+  >
+    Register
+  </Link>
+</p>
 
     </form>
     </div>
