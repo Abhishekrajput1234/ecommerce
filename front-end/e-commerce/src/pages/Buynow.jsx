@@ -107,8 +107,16 @@ export default function Buynow({buyproduct}){
 </button>
 
 <button
-onClick={()=>navigate("/checkout")}
-className="bg-blue-600 px-8 py-2 text-sm font-medium rounded-lg cursor-pointer text-white">
+  onClick={() =>
+    navigate("/checkout", {
+      state: {
+        product: buyproduct,
+        quantity: quantity,
+      },
+    })
+  }
+  className="bg-blue-600 px-8 py-2 text-sm font-medium rounded-lg cursor-pointer text-white"
+>
   Buy Now
 </button>
 
