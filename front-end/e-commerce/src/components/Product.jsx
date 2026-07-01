@@ -56,7 +56,8 @@ const addToCart = (item) => {
         <>
 
         <h1 className="text-3xl font-bold text-center my-5">
-            Product List
+            <span className="text-gray-700 font-bold text-4xl">Product </span>
+             <span className="text-red-700 font-bold text-4xl"> List</span> 
         </h1>
 
       
