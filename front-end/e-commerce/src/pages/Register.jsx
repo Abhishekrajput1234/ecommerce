@@ -39,6 +39,7 @@ export default function Register(){
 
         alert("register successfully")
 
+        localStorage.setItem("user",JSON.stringify(user))
      
 
 

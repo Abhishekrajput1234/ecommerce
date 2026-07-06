@@ -7,6 +7,30 @@ export default function Buynow({buyproduct}){
 
     const [quantity, setQuantity]  = useState(1)
 
+    const buyNowHandler = ()=>{
+
+    const user =  localStorage.getItem("user")
+
+      if(!user){
+        alert("please register first")
+        navigate("/register")
+        return;
+      }
+
+       navigate("/checkout", {
+      state: {
+        product: buyproduct,  
+      quantity: quantity,
+      },
+    });
+
+
+    }
+
+   
+
+
+
     return(<> 
 
     <div className="bg-gray-100 min-h-screen py-10">
@@ -107,14 +131,9 @@ export default function Buynow({buyproduct}){
 </button>
 
 <button
-  onClick={() =>
-    navigate("/checkout", {
-      state: {
-        product: buyproduct,
-        quantity: quantity,
-      },
-    })
-  }
+  onClick={ buyNowHandler}
+  
+  
   className="bg-blue-600 px-8 py-2 text-sm font-medium rounded-lg cursor-pointer text-white"
 >
   Buy Now
