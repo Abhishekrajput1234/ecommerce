@@ -3,12 +3,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from 'react-router-dom';
-export default function Header(){
+import { FaShoppingCart } from "react-icons/fa";
+export default function Header({cart={cart}}){
     const[open,setOpen]=useState(false)
     return(<>
     
   <div className=" top-0 left-0 w-full  bg-gray-50 shadow-sm  z-50 ">
-    <div className="max-w-7xl mx-auto flex items-center py-4 px-6">
+    <div className="max-w-7xl mx-auto flex items-center py-3 px-6">
 
     {/* Left */}
     <div className="flex-1">
@@ -18,7 +19,7 @@ export default function Header(){
     </div>
 
     {/* Center */}
-    <ul className="hidden md:flex flex-1 justify-center gap-10 font-semibold text-gray-700 capitalize">
+    <ul className="hidden md:flex flex-1 items-center justify-center gap-10 font-semibold text-gray-700 capitalize">
         <li>
             <Link to="/" className="hover:text-blue-600">
                 Home
@@ -26,9 +27,33 @@ export default function Header(){
         </li>
 
         <li>
-            <Link to="/cart" className="hover:text-blue-600">
-                Cart
-            </Link>
+            <Link to="/cart" className="relative inline-block">
+    <FaShoppingCart className="text-xl text-gray-800 hover:text-blue-600" />
+
+    {cart.length > 0 && (
+        <span
+            className="
+            absolute
+            -top-2
+            -right-2
+            bg-red-600
+            text-white
+            text-xs
+            font-bold
+            rounded-full
+            w-4
+            h-4
+            flex
+            items-center
+            justify-center
+            shadow-lg
+          
+            "
+        >
+            {cart.length}
+        </span>
+    )}
+</Link>
         </li>
     </ul>
 
@@ -55,7 +80,32 @@ export default function Header(){
 <ul className="  md:hidden flex flex-col text-center p-3 gap-2 items-center font-bold  capitalize ">
 <li><Link to="/">home</Link></li>
 
-<li><Link to="/cart">cart</Link></li>
+<li><Link to="/cart" className="relative inline-block">
+    <FaShoppingCart className="text-2xl text-gray-800 hover:text-blue-600" />
+
+    {cart.length > 0 && (
+        <span
+            className="
+            absolute
+            -top-2
+            -right-2
+            bg-red-600
+            text-white
+            text-xs
+            font-bold
+            rounded-full
+            w-4
+            h-4
+            flex
+            items-center
+            justify-center
+            shadow-lg
+            "
+        >
+            {cart.length}
+        </span>
+    )}
+</Link></li>
 <li><Link to="/wishlist"><FavoriteBorderIcon fontSize="medium" /></Link></li>
 <li><Link to="/register">
 <AccountCircleIcon fontSize="medium" />

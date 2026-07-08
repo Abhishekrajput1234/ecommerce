@@ -12,16 +12,18 @@ import Footer from "../components/Footer"
 
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 
-export default function Home({setBuyproduct, setCart}){
+export default function Home({setBuyproduct, setCart, cart}){
     return(<>
 
-    <Header/>
+    <Header cart={cart}/>
     <Hero/>
-   <FeatureProducts setBuyproduct={setBuyproduct}/>
+   <FeatureProducts setBuyproduct={setBuyproduct}
+   setCart={setCart}
+    cart={cart} />
     <Product 
     setBuyproduct={setBuyproduct}
     setCart={setCart}
-    
+    cart={cart}
     
     />
     

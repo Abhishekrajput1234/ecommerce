@@ -11,19 +11,27 @@ export default function Cart({cart}){
 
             cart.map((item, index)=>(
 
-                <div key={index}  className="flex gap-4 shadow p-4 mb-4 rounded">
+                <div key={index}  className="flex gap-8 shadow p-4 mb-4 rounded">
                     <img src={item.image}
                     alt={item.title}
-                    className="w-24 h-24 object-cover rounded"
+                    className="w-64 h-64 object-cover rounded"
                     />
 
                      <div>
-              <h2 className="font-semibold">
+              <h2 className="font-semibold text-2xl text-gray-800">
                 {item.title}
               </h2>
 
-              <p>₹ {item.price}</p>
-            </div>
+           
+
+            <p className="text-gray-600 mt-2 text-lg ">
+                         {item.description}
+                        </p>
+
+                           <p className="text-2xl font-bold text-gray-800">₹ {item.price}</p>
+           
+
+                        </div>
 
                 </div>
             ))

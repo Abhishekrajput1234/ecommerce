@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react";
 import Header from "./components/Header"
 
 import Register from "./pages/Register"
@@ -17,7 +17,19 @@ import{BrowserRouter,Routes,Route} from "react-router-dom"
 export default function App(){
 
   const[buyproduct,setBuyproduct]=useState({})
-  const [cart,setCart]=useState([])
+  const [cart, setCart] = useState(() => {
+  const savedCart = localStorage.getItem("cart");
+  return savedCart ? JSON.parse(savedCart) : [];
+});
+
+useEffect(() => {
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
+
+}, [cart]);
 
 
 

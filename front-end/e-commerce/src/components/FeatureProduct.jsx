@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import {useNavigate} from "react-router-dom"
-export default function FeatureProduct({setBuyproduct}){ 
+export default function FeatureProduct({setBuyproduct,cart,setCart}){ 
 
   const [featuredProducts, setFeaturedProducts]=useState([])
   const navigate = useNavigate()
@@ -14,6 +14,23 @@ export default function FeatureProduct({setBuyproduct}){
  
 
   },[])
+
+  const addToCart = (item)=>{
+
+    const alreadyExists = cart.find(
+        (product) => product._id === item._id
+    );
+
+    if(alreadyExists){
+        alert("Product already added!");
+        return;
+    }
+
+    setCart([...cart, item]);
+
+    alert("Product added to cart!");
+
+  }
 
 
 
@@ -72,6 +89,7 @@ export default function FeatureProduct({setBuyproduct}){
         <div className="flex flex-col  ">
 
           <button 
+          onClick={()=>addToCart(item)}
             className="bg-yellow-500 w-full text-white px-3 py-2 rounded-lg
                          hover:bg-yellow-600 mt-3 cursor-pointer capitalize text-sm font-medium ">
             Add to cart

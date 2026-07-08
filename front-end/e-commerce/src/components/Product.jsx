@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import {useNavigate} from "react-router-dom"
 
-export default function Product({setBuyproduct, setCart}){
+export default function Product({setBuyproduct, setCart,cart}){
 
     const [products, setProducts] = useState([])
     const navigate = useNavigate()
@@ -48,15 +48,29 @@ export default function Product({setBuyproduct, setCart}){
 // Add to cart function
 
 const addToCart = (item) => {
-  console.log("Adding:", item);
-  setCart((prev) => [...prev, item]);
+
+    const alreadyExists = cart.find(
+        (product) => product._id === item._id
+    );
+
+    if (alreadyExists) {
+
+        alert("Product already added!");
+
+        return;
+    }
+
+    setCart([...cart, item]);
+
+    alert("Added to cart");
 };
     return(
 
         <>
 
         <h1 className="text-3xl font-bold text-center my-5">
-            Product List
+            <span className="text-gray-700 font-bold text-4xl">Product </span>
+             <span className="text-red-700 font-bold text-4xl"> List</span> 
         </h1>
 
       
