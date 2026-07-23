@@ -55,15 +55,38 @@ const addToCart = (item) => {
 
     if (alreadyExists) {
 
-        alert("Product already added!");
+        const updatedCart = cart.map((product) =>
+
+            product._id === item._id
+                ? {
+                    ...product,
+                    quantity: product.quantity + 1
+                }
+                : product
+
+
+              
+
+        );
+
+        setCart(updatedCart);
+
+    
 
         return;
     }
 
-    setCart([...cart, item]);
+    setCart([
+        ...cart,
+        {
+            ...item,
+            quantity: 1
+        }
+    ]);
 
-    alert("Added to cart");
+         alert("Product added to cart!");
 };
+
     return(
 
         <>

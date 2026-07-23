@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import {useState} from 'react'
 
-export default function Buynow({buyproduct}){
+export default function Buynow({buyproduct, cart , setCart}){
 
     const navigate = useNavigate()
 
@@ -26,6 +26,45 @@ export default function Buynow({buyproduct}){
 
 
     }
+
+    // add to cart functionality
+
+    const addToCart = () => {
+
+    const alreadyExists = cart.find(
+        (product) => product._id === buyproduct._id
+    );
+
+    if (alreadyExists) {
+
+        const updatedCart = cart.map((product) =>
+
+            product._id === buyproduct._id
+                ? {
+                    ...product,
+                    quantity: product.quantity + quantity
+                }
+                : product
+
+        );
+
+        setCart(updatedCart);
+
+        alert("Quantity Updated");
+
+        return;
+    }
+
+    setCart([
+        ...cart,
+        {
+            ...buyproduct,
+            quantity: quantity
+        }
+    ]);
+
+    alert("Product Added To Cart");
+};
 
    
 
@@ -126,7 +165,9 @@ export default function Buynow({buyproduct}){
 
         <div className="flex gap-6 mt-6">
 
-<button className="bg-yellow-500 px-8 py-2 text-sm font-medium rounded-lg cursor-pointer text-white">
+<button 
+onClick={addToCart}
+className="bg-yellow-500 px-8 py-2 text-sm font-medium rounded-lg cursor-pointer text-white">
   Add To Cart
 </button>
 
