@@ -2,10 +2,27 @@ import {useState, useEffect} from 'react'
 export default function Deal(){
 
     const[deal,setDeal]=useState([])
+    const [trending, setTrending]=useState([])
+
+
+const fetchtrend = () => {
+    fetch("http://localhost:2000/trending")
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);              // Entire response object
+            console.log(data.products);     // Only the products array
+
+            setTrending(data.products);
+        })
+        .catch((error) => {
+            console.log("error", error);
+        });
+};
+
 
     const fetchdeal=()=>{
 
-      fetch("http://localhost:2000/deal")
+      fetch("http://localhost:2000/getdeal")
         .then((res)=>res.json())
         .then((data)=>setDeal(data))
         .catch((err)=>{
@@ -13,9 +30,12 @@ export default function Deal(){
         })
     }
 
+    //fetch trending products 
+
     useEffect(()=>{
 
         fetchdeal();
+        fetchtrend();
 
 
     },[])
@@ -67,7 +87,135 @@ export default function Deal(){
                     </div>
 
                 </div>
-            </section>
+
+                     </section>
+
+
+    <div className="max-w-7xl mx-auto py-12 px-5">
+
+    <h2 className="text-4xl font-bold text-center mb-8">
+        🔥 Today's Best Deals
+    </h2>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+
+        {
+            deal.map((item) => (
+
+                <div
+                    key={item._id}
+                    className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition"
+                >
+
+                    <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-52 object-cover"
+                    />
+
+                    <div className="p-4">
+
+                        <h3 className="text-lg font-semibold">
+                            {item.title}
+                        </h3>
+
+                        <div className="flex items-center justify-between mt-3">
+
+                            <span className="text-2xl font-bold text-red-600">
+                                ₹{item.price}
+                            </span>
+
+                            <span className="bg-red-100 text-red-600 px-2 py-1 rounded text-sm font-semibold">
+                                {item.discount}% OFF
+                            </span>
+
+                        </div>
+
+                        <button
+                            className="w-full mt-4 bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition cursor-pointer"
+                        >
+                            Shop Now
+                        </button>
+
+                    </div>
+
+                </div>
+
+            ))
+        }
+
+    </div>
+
+</div>
+
+
+
+
+<div className="max-w-7xl mx-auto py-12 px-5">
+
+    <h2 className="text-4xl font-bold text-center mb-8">
+        ⭐ Trending Products
+    </h2>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+
+        {
+            trending.map((item) => (
+
+                <div
+                    key={item._id}
+                    className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"
+                >
+
+                    <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-56 object-cover"
+                    />
+
+                    <div className="p-4">
+
+                        <h3 className="text-lg font-semibold">
+                            {item.title}
+                        </h3>
+
+                        <p className="text-gray-600 text-sm mt-2 line-clamp-2">
+                            {item.description}
+                        </p>
+
+                        <div className="flex justify-between items-center mt-4">
+
+                            <span className="text-2xl font-bold text-orange-600">
+                                ₹{item.price}
+                            </span>
+
+                            <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">
+                                {item.stock} Left
+                            </span>
+
+                        </div>
+
+                        <button
+                            className="w-full mt-5 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg transition duration-300 cursor-pointer"
+                        >
+                            Add to Cart
+                        </button>
+
+                    </div>
+
+                </div>
+
+            ))
+        }
+
+    </div>
+
+</div>
+
+
+
+
+       
 
 
      

@@ -11,6 +11,7 @@ export default function Product({setBuyproduct, setCart,cart}){
         fetch("https://ecommerce-33jn.onrender.com/getproducts")
 
         .then((res)=>res.json())
+       
 
         .then((json)=>{
 

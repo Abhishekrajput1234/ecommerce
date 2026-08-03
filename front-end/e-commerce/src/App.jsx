@@ -11,6 +11,7 @@ import CheckoutPage from "./pages/CheckoutPage"
 import Payment from "./pages/Payment"
 import OrderSuccess from "./pages/OrderSuccess"
 import Deal from "./pages/Deal"
+import Contact from "./pages/Contact"
 
 
 import{BrowserRouter,Routes,Route} from "react-router-dom"
@@ -62,6 +63,7 @@ useEffect(() => {
     <Route path="/payment" element={<Payment/>}/>
     <Route path="/ordersuccess" element={<OrderSuccess/>}/>
     <Route path="/deal" element={<Deal/>}/>
+    <Route path="/contact" element={<Contact/>}/>
   </Routes>
   
   </BrowserRouter>
