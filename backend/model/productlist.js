@@ -32,6 +32,11 @@ const product = new mongoose.Schema({
     featured:{
         type:Boolean,
         default:false
+    },
+
+    trending:{
+        type:Boolean,
+        default:false
     }
 
 })

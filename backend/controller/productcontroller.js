@@ -15,6 +15,7 @@ const productview = async(req,res)=>{
                 description:"Stylish cotton casual shirt with comfortable fitting, breathable fabric, and modern design perfect for office wear and everyday fashion styling.",
                 featured:false,
                  stock:12,
+                 trending:true
                 
                 
             },
@@ -36,6 +37,7 @@ const productview = async(req,res)=>{
     description:"Comfortable lightweight sneakers with breathable material, cushioned sole, and stylish sporty design ideal for running,  and casual wear.",
      featured:false,
      stock:8,
+     trending:true
      
 
 },
@@ -49,6 +51,7 @@ const productview = async(req,res)=>{
                 description:"Trendy girls fashion top featuring soft fabric, elegant design, and comfortable fitting perfect for parties, casual outings, college, and everyday styling.",
                 featured:true,
                 stock:22,
+                 trending:true
             },
 
             {
@@ -68,6 +71,7 @@ const productview = async(req,res)=>{
                 description:"Premium leather handbag with spacious compartments, elegant finishing, stylish appearance, and  office, and parties.",
                 featured:true,
                 stock:17,
+                 trending:true
                 
             },
 
@@ -90,6 +94,7 @@ const productview = async(req,res)=>{
                 description:"Fresh dairy milk packed with calcium, protein, and nutrients suitable for tea, coffee,  sweets, and healthy daily consumption.",
                  featured:false,
                  stock:10,
+                  trending:true
             
             },
 
@@ -144,4 +149,24 @@ const getproducts = async(req,res)=>{
 
 }
 
-module.exports = { productview, getproducts }
+const deleteproducts = async(req,res)=>{
+
+    try{
+
+    const deleteproduct = await productlist.deleteMany({})
+
+     res.status(200).json({
+            message:"Products delete successfully"
+        })
+        
+    } catch (error) {
+
+    res.status(500).json({
+        message: error.message
+    });
+
+
+}
+}
+
+module.exports = { productview, getproducts,deleteproducts }

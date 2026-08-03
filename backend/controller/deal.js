@@ -4,7 +4,9 @@ const createDeal = async (req, res) => {
 
     try {
 
-        const deals = [
+        const dealproduct = await Deal.create([
+
+           
 
             {
                 title: "Nike Running Shoes",
@@ -41,16 +43,16 @@ const createDeal = async (req, res) => {
                 discount: 45
             }
 
-        ];
+        ])
 
-        await Deal.insertMany(deals);
+        if(dealproduct){
+            res.status(200).json({message:"product created successfully"})
+        } else{
+            res.status(400).json({message:"product is not inserted"})
+        }
+        
 
-        res.status(201).json({
-            success: true,
-            message: "Deals inserted successfully"
-        });
-
-    } catch (error) {
+     } catch (error) {
 
         res.status(500).json({
             success: false,
@@ -82,8 +84,32 @@ const getDeals = async (req, res) => {
 
 }
 
-module.exports = getDeals;
+const deletedeal = async(req,res)=>{
+
+    try{
+
+    const dealdelete = await Deal.deleteMany({})
+
+    if(dealdelete){
+        res.status(200).json({message:"deleted successfully"})
+    }else{
+        res.status(400).json({message:"error in deletion"})
+    }
+
+ } catch (error) {
+
+    res.status(500).json({
+        message: error.message
+    });
+
+
+    }
+}
 
 
 
-module.exports = {createDeal , getDeals}
+
+
+
+
+module.exports = {createDeal , getDeals, deletedeal}
