@@ -37,7 +37,7 @@ const productview = async(req,res)=>{
     description:"Comfortable lightweight sneakers with breathable material, cushioned sole, and stylish sporty design ideal for running,  and casual wear.",
      featured:false,
      stock:8,
-     trending:true
+    
      
 
 },
