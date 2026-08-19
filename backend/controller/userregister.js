@@ -66,8 +66,45 @@ const loginUser=async(req,res)=>{
     }
 }
 
+const deleteuser=async(req,res)=>{
+
+    try{
+
+        
+    const result = await userregister.deleteMany({})
+
+    if(result){
+
+    res.status(200).json({message:"all register user delete successfully"})
+    }
+    else{
+        res.ststus(400).json({message:"error in connection"})
+    }
+
+
+
+    }
+
+
+
+    catch(error){
+
+        res.status(500).json({message:"something went wrong", error})
+
+    }
+
+
+   
+
+    
 
 
 
 
-module.exports={registerUser,loginUser}
+}
+
+
+
+
+
+module.exports={registerUser,loginUser,deleteuser}
