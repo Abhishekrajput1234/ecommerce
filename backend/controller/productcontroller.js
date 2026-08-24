@@ -149,6 +149,8 @@ const getproducts = async(req,res)=>{
 
 }
 
+
+
 const deleteproducts = async(req,res)=>{
 
     try{
