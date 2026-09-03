@@ -25,9 +25,9 @@ export default function Header({ cart }) {
                 Home
             </Link>
 
-            <Link to="/deal" className="hover:text-blue-600">
+           {/* <Link to="/deal" className="hover:text-blue-600">
                 deals
-            </Link>
+            </Link>*/}
 
             <Link to="/about" className="hover:text-blue-600">
                 about
@@ -40,7 +40,6 @@ export default function Header({ cart }) {
 
         </li>
 
-      
     </ul>
 
     {/* Right */}
@@ -90,8 +89,6 @@ export default function Header({ cart }) {
 <ul className="  md:hidden flex flex-col text-center p-3 gap-2 items-center font-bold  capitalize ">
 <li><Link to="/">home</Link></li>
 
-<li><Link to="/deal">deals</Link></li>
-
 <li><Link to="/about">about</Link></li>
 
 <li><Link to="/contact">contact</Link></li>
@@ -124,6 +121,7 @@ export default function Header({ cart }) {
         </span>
     )}
 </Link></li>
+
 <li><Link to="/wishlist"><FavoriteBorderIcon fontSize="medium" /></Link></li>
 <li><Link to="/register">
 <AccountCircleIcon fontSize="medium" />

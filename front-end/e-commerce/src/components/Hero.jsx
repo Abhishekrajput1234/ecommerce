@@ -30,16 +30,16 @@ export default function Hero() {
 
           <div className="flex gap-4 mt-8">
 
-            <button
+           {/* <button
               onClick={() => navigate("/products")}
               className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
             >
               Shop Now
-            </button>
+            </button> */}
 
             <button
               onClick={() => navigate("/register")}
-              className="border border-gray-400 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg cursor-pointer font-semibold hover:bg-blue-700 transition"
             >
               Explore More
             </button>
