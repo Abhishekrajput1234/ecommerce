@@ -126,29 +126,33 @@ const productview = async(req,res)=>{
 
 }
 
-const getproducts = async(req,res)=>{
 
-    try{
+const getproducts = async (req, res) => {
 
-        const products = await productlist.find()
+    const start = Date.now();
+
+    try {
+
+        const products = await productlist.find();
+
+        const dbTime = Date.now() - start;
+
+        console.log("MongoDB query time:", dbTime, "ms");
 
         res.status(200).json({
-            message:"products retrieved successfully",
+            message: "products retrieved successfully",
             products
-        })
+        });
 
-    }
+    } catch (err) {
 
-    catch(err){
+        console.error(err);
 
         res.status(500).json({
-            error:err.message
-        })
-
+            error: err.message
+        });
     }
-
-}
-
+};
 
 
 const deleteproducts = async(req,res)=>{
