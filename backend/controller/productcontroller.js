@@ -1,6 +1,8 @@
+const XLSX = require("xlsx");
 const productlist = require("../model/productlist")
+//const multer = require("multer");
 
-const productview = async(req,res)=>{
+/*const productview = async(req,res)=>{
 
     try{
 
@@ -125,6 +127,62 @@ const productview = async(req,res)=>{
     }
 
 }
+    */
+
+
+const bulkUploadProducts = async (req, res) => {
+
+    try {
+
+        // Check Excel file
+        if (!req.file) {
+            return res.status(400).json({
+                message: "Please upload an Excel file"
+            });
+        }
+
+        // Read Excel file
+        const workbook = XLSX.read(req.file.buffer, {
+            type: "buffer"
+        });
+
+        // Get first sheet
+        const sheetName = workbook.SheetNames[0];
+
+        const sheet = workbook.Sheets[sheetName];
+
+        // Convert Excel data into JSON
+        const products = XLSX.utils.sheet_to_json(sheet);
+
+        // Check empty Excel file
+        if (products.length === 0) {
+            return res.status(400).json({
+                message: "Excel file is empty"
+            });
+        }
+
+        // Insert products into MongoDB
+        const Saveproducts = await productlist.insertMany(products);
+
+        res.status(201).json({
+            success: true,
+            message: "Products uploaded successfully",
+            totalImported: Saveproducts.length,
+            products: Saveproducts
+        });
+
+    }
+
+    catch (err) {
+
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+
+    }
+
+};
 
 
 const getproducts = async (req, res) => {
@@ -175,4 +233,4 @@ const deleteproducts = async(req,res)=>{
 }
 }
 
-module.exports = { productview, getproducts,deleteproducts }
+module.exports = { bulkUploadProducts, getproducts,deleteproducts }

@@ -1,11 +1,21 @@
 const express = require("express")
 const {registerUser,loginUser,deleteuser} = require("../controller/userregister")  
-const {productview,getproducts,deleteproducts}  = require("../controller/productcontroller")
+const {bulkUploadProducts,getproducts,deleteproducts}  = require("../controller/productcontroller")
 const getfeatureproducts = require("../controller/featureproducts")
 const checkout = require("../controller/checkout")
 const {createDeal,getDeals,deletedeal} = require("../controller/deal")
 const {trendingproduct,Addtrending} = require("../controller/trending")
 const contactuser = require("../controller/contactform")
+
+
+const multer = require("multer");
+
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+        fileSize: 5 * 1024 * 1024
+    }
+});
 
 var router = express.Router()
 
@@ -14,7 +24,11 @@ router.post("/register",registerUser)
 router.post("/login",loginUser)
 router.delete("/delete",deleteuser)
 router.get("/getfeatureproducts",getfeatureproducts)
-router.get("/products",productview)
+router.post(
+    "/products",
+    upload.single("file"),
+    bulkUploadProducts
+);
 router.get("/getproducts",getproducts)
 router.post("/checkout",checkout)
 router.post("/deal",createDeal)
