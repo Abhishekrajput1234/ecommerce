@@ -5,15 +5,12 @@ export default function FeatureProduct({setBuyproduct,cart,setCart}){
   const [featuredProducts, setFeaturedProducts]=useState([])
   const navigate = useNavigate()
 
-  useEffect(()=>{
-    fetch("https://ecommerce-33jn.onrender.com/getfeatureproducts")
-    .then(res=>res.json())
-   .then(data=>setFeaturedProducts(data.featureproducts))
-    .catch(err=>console.log(err)
-    )
- 
-
-  },[])
+  useEffect(() => {
+  fetch(`${import.meta.env.VITE_API_URL}/getfeatureproducts`)
+    .then((res) => res.json())
+    .then((data) => setFeaturedProducts(data.featureproducts || []))
+    .catch((err) => console.log(err))
+}, [])
 
   const addToCart = (item)=>{
 
