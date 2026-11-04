@@ -6,26 +6,15 @@ export default function Product({setBuyproduct, setCart,cart}){
     const [products, setProducts] = useState([])
     const navigate = useNavigate()
 
-    const fetchdata = ()=>{
-
-        fetch("https://ecommerce-33jn.onrender.com/getproducts")
-
-        .then((res)=>res.json())
-       
-
-        .then((json)=>{
-
-            console.log(json)
-
-            // STORE ONLY ARRAY
-
-            setProducts(json.products)
-
-        })
-
-        .catch((err)=>console.log(err))
-
-    }
+  const fetchdata = () => {
+  fetch(`${import.meta.env.VITE_API_URL}/getproducts`)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json)
+      setProducts(json.products || [])
+    })
+    .catch((err) => console.log(err))
+}
 
     useEffect(()=>{
 
