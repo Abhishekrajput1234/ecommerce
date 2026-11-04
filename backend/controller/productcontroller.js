@@ -1,142 +1,13 @@
 const XLSX = require("xlsx");
-const productlist = require("../model/productlist")
-//const multer = require("multer");
-
-/*const productview = async(req,res)=>{
-
-    try{
-
-        await productlist.create([
-
-            // ================= Boys Products =================
-
-            {
-                title:"Mens Casual Shirt",
-                price:999,
-                image:"https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
-                description:"Stylish cotton casual shirt with comfortable fitting, breathable fabric, and modern design perfect for office wear and everyday fashion styling.",
-                featured:false,
-                 stock:12,
-                 trending:true
-                
-                
-            },
-
-            {
-                title:"Mens Blue Jeans",
-                price:1499,
-                image:"https://images.unsplash.com/photo-1542272604-787c3835535d",
-                description:"Premium slim fit blue jeans with stretchable fabric, durable stitching, and trendy style suitable for casual wear, travel, and daily comfort.",
-                featured:true,
-                 stock:10,
-                
-            },
-
-            {
-    title:"Mens Sneakers",
-    price:2499,
-    image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff",
-    description:"Comfortable lightweight sneakers with breathable material, cushioned sole, and stylish sporty design ideal for running,  and casual wear.",
-     featured:false,
-     stock:8,
-    
-     
-
-},
-
-            // ================= Girls Products =================
-
-            {
-                title:"Girls Stylish Top",
-                price:799,
-                image:"https://images.unsplash.com/photo-1483985988355-763728e1935b",
-                description:"Trendy girls fashion top featuring soft fabric, elegant design, and comfortable fitting perfect for parties, casual outings, college, and everyday styling.",
-                featured:true,
-                stock:22,
-                 trending:true
-            },
-
-            {
-                title:"Girls Kurti",
-                price:1299,
-                image:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b",
-                description:"Beautiful traditional printed kurti crafted with premium fabric, attractive patterns, and comfortable fitting suitable for festivals, and casual occasions.",
-                featured:false,
-                stock:10,
-                
-            },
-
-            {
-                title:"Girls Handbag",
-                price:1999,
-                image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3",
-                description:"Premium leather handbag with spacious compartments, elegant finishing, stylish appearance, and  office, and parties.",
-                featured:true,
-                stock:17,
-                 trending:true
-                
-            },
-
-            // ================= Grocery Products =================
-
-            {
-                title:"Fresh Apples",
-                price:199,
-                image:"https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6",
-                description:"Fresh organic apples rich in vitamins, natural taste, and nutrition ideal for healthy diets, fruit salads, juices, and daily energy needs.",
-              featured:false,
-              stock:10,
-                
-            },
-
-            {
-                title:"Milk Packet",
-                price:60,
-                image:"https://images.unsplash.com/photo-1550583724-b2692b85b150",
-                description:"Fresh dairy milk packed with calcium, protein, and nutrients suitable for tea, coffee,  sweets, and healthy daily consumption.",
-                 featured:false,
-                 stock:10,
-                  trending:true
-            
-            },
-
-            {
-                title:"Rice Bag",
-                price:899,
-                image:"https://images.unsplash.com/photo-1586201375761-83865001e31c",
-                description:"Premium basmati rice with rich aroma, long grains, and delicious taste perfect for biryani, pulao, , and special family occasions.",
-                 featured:false,
-                 stock:18,
-                
-            }
-
-        ])
-
-        res.status(200).json({
-            message:"Products added successfully"
-        })
-
-    }
-
-    catch(err){
-
-        res.status(500).json({
-            error:err.message
-        })
-
-    }
-
-}
-    */
-
+const productlist = require("../model/productlist");
 
 const bulkUploadProducts = async (req, res) => {
-
     try {
 
-        // Check Excel file
+        // Check file
         if (!req.file) {
             return res.status(400).json({
+                success: false,
                 message: "Please upload an Excel file"
             });
         }
@@ -151,86 +22,75 @@ const bulkUploadProducts = async (req, res) => {
 
         const sheet = workbook.Sheets[sheetName];
 
-        // Convert Excel data into JSON
+        // Convert Excel into JSON
         const products = XLSX.utils.sheet_to_json(sheet);
 
-        // Check empty Excel file
+        // Check data
         if (products.length === 0) {
             return res.status(400).json({
+                success: false,
                 message: "Excel file is empty"
             });
         }
 
-        // Insert products into MongoDB
-        const Saveproducts = await productlist.insertMany(products);
+        console.log("Excel Products:", products);
+
+        // Save products in MongoDB
+        const savedProducts = await productlist.insertMany(products);
 
         res.status(201).json({
             success: true,
             message: "Products uploaded successfully",
-            totalImported: Saveproducts.length,
-            products: Saveproducts
+            totalImported: savedProducts.length
         });
 
-    }
+    } catch (error) {
 
-    catch (err) {
+        console.log("Bulk Upload Error:", error);
 
         res.status(500).json({
             success: false,
-            message: err.message
+            message: error.message
         });
-
     }
-
 };
 
 
 const getproducts = async (req, res) => {
 
-    const start = Date.now();
-
-    try {
-
-        const products = await productlist.find();
-
-        const dbTime = Date.now() - start;
-
-        console.log("MongoDB query time:", dbTime, "ms");
-
-        res.status(200).json({
-            message: "products retrieved successfully",
-            products
-        });
-
-    } catch (err) {
-
-        console.error(err);
-
-        res.status(500).json({
-            error: err.message
-        });
-    }
-};
-
-
-const deleteproducts = async(req,res)=>{
-
     try{
 
-    const deleteproduct = await productlist.deleteMany({})
+        const productget = await productlist.find();
 
-     res.status(200).json({
-            message:"Products delete successfully"
-        })
-        
-    } catch (error) {
+        if(productget.length > 0){
 
-    res.status(500).json({
-        message: error.message
-    });
+            res.status(200).json({message:"Products retrieved successfully", productget})
+        }
+
+        else{
+            res.status(401).json({message:"No products found"})
+        }
 
 
+    }
+
+    catch(err){ 
+        res.status(500).json({message:"Error occurred while retrieving products", error: err.message})
+    }
 }
-}
 
-module.exports = { bulkUploadProducts, getproducts,deleteproducts }
+
+
+
+    
+
+
+
+
+
+
+
+module.exports = {
+    bulkUploadProducts,
+    getproducts
+};
