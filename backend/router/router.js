@@ -1,6 +1,6 @@
 const express = require("express")
 const {registerUser,loginUser,deleteuser} = require("../controller/userregister")  
-const {bulkUploadProducts,getproducts}  = require("../controller/productcontroller")
+const {bulkUploadProducts,getproducts,deleteAllProducts}  = require("../controller/productcontroller")
 const getfeatureproducts = require("../controller/featureproducts")
 const checkout = require("../controller/checkout")
 const {createDeal,getDeals,deletedeal} = require("../controller/deal")
@@ -30,6 +30,7 @@ router.post(
     bulkUploadProducts
 );
 router.get("/getproducts",getproducts)
+router.delete("/deleteallproducts", deleteAllProducts);
 router.post("/checkout",checkout)
 router.post("/deal",createDeal)
 router.get("/getdeal",getDeals)

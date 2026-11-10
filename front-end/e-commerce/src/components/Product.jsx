@@ -11,7 +11,7 @@ export default function Product({setBuyproduct, setCart,cart}){
     .then((res) => res.json())
     .then((json) => {
       console.log(json)
-      setProducts(json.products || [])
+      setProducts(json.productget || [])
     })
     .catch((err) => console.log(err))
 }

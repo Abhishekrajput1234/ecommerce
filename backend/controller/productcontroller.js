@@ -80,6 +80,26 @@ const getproducts = async (req, res) => {
 }
 
 
+// Delete ALL products
+const deleteAllProducts = async (req, res) => {
+    try {
+        const result = await productlist.deleteMany({});
+
+        res.status(200).json({
+            success: true,
+            message: "All products deleted successfully",
+            totalDeleted: result.deletedCount
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "Error occurred while deleting products",
+            error: err.message
+        });
+    }
+};
+
+
 
 
     
@@ -92,5 +112,6 @@ const getproducts = async (req, res) => {
 
 module.exports = {
     bulkUploadProducts,
-    getproducts
+    getproducts,
+    deleteAllProducts
 };
