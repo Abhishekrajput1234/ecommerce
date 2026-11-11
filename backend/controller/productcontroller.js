@@ -57,28 +57,38 @@ const bulkUploadProducts = async (req, res) => {
 
 
 const getproducts = async (req, res) => {
+    try {
+        // Get page and limit from URL
+        const page = Number(req.query.page) || 1;
+        const limit = Number(req.query.limit) || 8;
 
-    try{
+        // Calculate skip
+        const skip = (page - 1) * limit;
 
-        const productget = await productlist.find();
+        // Total products
+        const totalProducts = await productlist.countDocuments();
 
-        if(productget.length > 0){
+        // Fetch products for current page
+        const productget = await productlist
+            .find()
+            .skip(skip)
+            .limit(limit);
 
-            res.status(200).json({message:"Products retrieved successfully", productget})
-        }
+        res.status(200).json({
+            success: true,
+            productget,
+            currentPage: page,
+            totalPages: Math.ceil(totalProducts / limit),
+            totalProducts
+        });
 
-        else{
-            res.status(401).json({message:"No products found"})
-        }
-
-
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
     }
-
-    catch(err){ 
-        res.status(500).json({message:"Error occurred while retrieving products", error: err.message})
-    }
-}
-
+};
 
 // Delete ALL products
 const deleteAllProducts = async (req, res) => {
